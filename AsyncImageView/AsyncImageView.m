@@ -141,7 +141,7 @@ NSString *const AsyncImageErrorKey = @"error";
             }
             if (storeInCache)
             {
-                [self.cache setObject:image forKey:self.URL];
+                [self.cache setObject:image forKey:self.URL cost:UIImagePNGRepresentation(image).length];
             }
         }
         
@@ -313,11 +313,17 @@ NSString *const AsyncImageErrorKey = @"error";
 	return sharedCache;
 }
 
+- (void)setCacheTotalCostLimit:(NSUInteger)bytes
+{
+    [[self.class defaultCache] setTotalCostLimit:bytes];
+}
+
 - (AsyncImageLoader *)init
 {
 	if ((self = [super init]))
 	{
         self.cache = [[self class] defaultCache];
+        [self  setCacheTotalCostLimit:0];
         _concurrentLoads = 2;
         _loadingTimeout = 60.0;
 		_connections = [[NSMutableArray alloc] init];

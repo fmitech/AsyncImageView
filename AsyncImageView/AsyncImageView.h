@@ -64,6 +64,7 @@ extern NSString *const AsyncImageErrorKey;
 - (void)cancelLoadingImagesForTarget:(id)target;
 - (NSURL *)URLForTarget:(id)target action:(SEL)action;
 - (NSURL *)URLForTarget:(id)target;
+- (void)setCacheTotalCostLimit:(NSUInteger)bytes;
 
 @end
 
